@@ -6,12 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="daily" />
         <module name="dynamicProgramming" />
         <module name="programmingTricks" />
         <module name="systemDesign" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="daily" target="1.5" />
       <module name="dynamicProgramming" target="1.5" />
       <module name="incrementalLearning" target="1.5" />
       <module name="programmingTricks" target="1.5" />
