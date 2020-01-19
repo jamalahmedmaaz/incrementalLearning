@@ -1,2 +1,3 @@
 # incrementalLearning
-Incremental Larning
+Incremental Learning
+
