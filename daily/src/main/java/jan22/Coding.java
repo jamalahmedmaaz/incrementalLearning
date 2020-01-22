@@ -191,4 +191,97 @@ public class Coding {
             }
         }
     }
+
+    class LongestPalindromeSubseq {
+        String s;
+        int[][] cache;
+        int count = 0;
+
+        public int longestPalindromeSubseq(String s) {
+            if (s == null || s.length() == 0) {
+                return 0;
+            }
+            this.s = s;
+            cache = new int[s.length()][s.length()];
+            int r = rec(0, s.length() - 1);
+            // System.out.println(count);
+            return r;
+        }
+
+        public int rec(int first, int last) {
+            if (cache[first][last] != 0) {
+                // count++;
+                return cache[first][last];
+            }
+            if (first > last) {
+                return 0;
+            }
+            if (first == last) {
+                return 1;
+            }
+
+            if (s.charAt(first) == s.charAt(last)) {
+                cache[first][last] = 2 + rec(first + 1, last - 1);
+            } else {
+                int r1 = rec(first + 1, last);
+                int r2 = rec(first, last - 1);
+                int max = Math.max(r1, r2);
+                cache[first][last] = max;
+            }
+            return cache[first][last];
+        }
+    }
+
+    /**
+     * very similar to longest subsequence palindrome
+     */
+    class PalindromeRemoval_Hard {
+        int[][] dp;
+
+        public int minimumMoves(int[] A) {
+            int n = A.length;
+            dp = new int[n][n];
+            return dfs(0, n - 1, A);
+        }
+
+        int dfs(int i, int j, int[] A) {
+            if (i > j) {
+                return 0;
+            }
+            if (dp[i][j] > 0) {
+                return dp[i][j];
+            }
+            int res = dfs(i, j - 1, A) + 1;
+            if (j > 0 && A[j] == A[j - 1]) {
+                res = Math.min(res, dfs(i, j - 2, A) + 1);
+            }
+            for (int k = i; k < j - 1; ++k) {
+                if (A[k] == A[j]) {
+                    res = Math.min(res, dfs(i, k - 1, A) + dfs(k + 1, j - 1, A));
+                }
+            }
+            dp[i][j] = res;
+            return res;
+        }
+    }
+
+    class LongestPalindromeSubString {
+        public String longestPalindrome(String s) {
+            if (s == null || s.length() == 0) {
+                return s;
+            }
+            String result = "";
+            int n = s.length();
+            boolean[][] dp = new boolean[n][n];
+            for (int i = n - 1; i >= 0; i--) {
+                for (int j = i; j < n; j++) {
+                    dp[i][j] = s.charAt(i) == s.charAt(j) && (j - i < 3 || dp[i + 1][j - 1]);
+                    if (dp[i][j] && result.length() < j - i + 1) {
+                        result = s.substring(i, j + 1);
+                    }
+                }
+            }
+            return result;
+        }
+    }
 }
