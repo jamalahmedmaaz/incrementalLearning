@@ -1,4 +1,4 @@
-package jan23;
+package January.jan23;
 
 public class Coding {
     

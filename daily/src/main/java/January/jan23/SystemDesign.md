@@ -9,4 +9,4 @@ what stays the same.
 6. Depend upon abstractions, do not depend upon concrete classes.
 7. Principle of least Knowledge - talk only to your immediate friend.
 8. Hollywood principle - don't call us we will call you.
-9. A class should have one reason to change.
+9. A class should have one reason to change. 

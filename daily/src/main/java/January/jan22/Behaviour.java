@@ -1,4 +1,4 @@
-package jan23;
+package January.jan22;
 
 public class Behaviour {
 }
