@@ -13,11 +13,11 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="daily" target="1.5" />
-      <module name="dynamicProgramming" target="1.5" />
-      <module name="incrementalLearning" target="1.5" />
-      <module name="programmingTricks" target="1.5" />
-      <module name="systemDesign" target="1.5" />
+      <module name="daily" target="1.8" />
+      <module name="dynamicProgramming" target="1.8" />
+      <module name="incrementalLearning" target="1.8" />
+      <module name="programmingTricks" target="1.8" />
+      <module name="systemDesign" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
