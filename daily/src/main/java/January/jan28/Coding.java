@@ -17,6 +17,36 @@ public class Coding {
         relaxBellmanFord.getSourceToAllNodesShortestPath(edges2, 8);
     }
 
+    /**
+     * I am deep shit man. seriously, sometimes the brain is not working
+     * to do these kind of things.
+     */
+    class CreatingAllPathsFromSourceToDestination {
+
+        List<List<String>> result = new ArrayList<>();
+        Map<String, List<String>> parents = new HashMap<>();
+        Map<String, Integer> weight = new HashMap<>();
+
+        private void dfs(String cur, String end, List<String> solution) {
+            solution.add(cur);
+            if (end.equals(cur)) {
+                result.add(new ArrayList<>(solution));
+            } else {
+                if (parents.containsKey(cur)) {
+                    for (String next : parents.get(cur)) {
+                        //This maintains the correctness of the system.
+                        // If you dont check if next weight is equal to curWeight + 1.
+                        // It means you are picking anything and creating the list.
+                        if (weight.get(next) == weight.get(cur) + 1) {
+                            dfs(next, end, solution);
+                        }
+                    }
+                }
+            }
+            solution.remove(solution.size() - 1);
+        }
+    }
+
     class FlyodWarshal_Kil {
 
         int MAX = 8000;
