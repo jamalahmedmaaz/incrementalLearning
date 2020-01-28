@@ -1,20 +1,57 @@
 package January.jan28;
 
 import java.util.*;
-
-import static January.jan28.Coding.Kruskal_Sorted_Union_MST.Edge;
 public class Coding {
 
     public static void main(String[] args) {
-        List<Kruskal_Sorted_Union_MST.Edge> edges = Arrays.asList(new Edge(4, 5, 0.35), new Edge(4, 7, 0.37), new Edge(5, 7, 0.28), new Edge(0, 7, 0.16), new Edge(1, 5, 0.32), new Edge(0, 4, 0.38), new Edge(2, 3, 0.17), new Edge(1, 7, 0.19), new Edge(0, 2, 0.26), new Edge(1, 2, 0.36), new Edge(1, 3, 0.29), new Edge(2, 7, 0.34), new Edge(6, 2, 0.40), new Edge(3, 6, 0.52), new Edge(6, 0, 0.58), new Edge(6, 4, 0.93));
+        List<Edge> edges = Arrays.asList(new Edge(4, 5, 0.35), new Edge(4, 7, 0.37), new Edge(5, 7, 0.28), new Edge(0, 7, 0.16), new Edge(1, 5, 0.32), new Edge(0, 4, 0.38), new Edge(2, 3, 0.17), new Edge(1, 7, 0.19), new Edge(0, 2, 0.26), new Edge(1, 2, 0.36), new Edge(1, 3, 0.29), new Edge(2, 7, 0.34), new Edge(6, 2, 0.40), new Edge(3, 6, 0.52), new Edge(6, 0, 0.58), new Edge(6, 4, 0.93));
         Kruskal_Sorted_Union_MST kruskal = new Kruskal_Sorted_Union_MST();
         System.out.println(kruskal.mstCost(edges, 8));
 
-        List<Kruskal_Sorted_Union_MST.Edge> edges1 = Arrays.asList(new Edge(4, 5, 0.35), new Edge(4, 7, 0.37), new Edge(5, 7, 0.28), new Edge(0, 7, 0.16), new Edge(1, 5, 0.32), new Edge(0, 4, 0.38), new Edge(2, 3, 0.17), new Edge(1, 7, 0.19), new Edge(0, 2, 0.26), new Edge(1, 2, 0.36), new Edge(1, 3, 0.29), new Edge(2, 7, 0.34), new Edge(6, 2, 0.40), new Edge(3, 6, 0.52), new Edge(6, 0, 0.58), new Edge(6, 4, 0.93));
+        List<Edge> edges1 = Arrays.asList(new Edge(4, 5, 0.35), new Edge(4, 7, 0.37), new Edge(5, 7, 0.28), new Edge(0, 7, 0.16), new Edge(1, 5, 0.32), new Edge(0, 4, 0.38), new Edge(2, 3, 0.17), new Edge(1, 7, 0.19), new Edge(0, 2, 0.26), new Edge(1, 2, 0.36), new Edge(1, 3, 0.29), new Edge(2, 7, 0.34), new Edge(6, 2, 0.40), new Edge(3, 6, 0.52), new Edge(6, 0, 0.58), new Edge(6, 4, 0.93));
         Kruskal_Sorted_Union_MST kruskal1 = new Kruskal_Sorted_Union_MST();
         System.out.println(kruskal1.getMST(edges1, 8));
 
+        List<Edge> edges2 = Arrays.asList(new Edge(4, 5, 0.35), new Edge(4, 7, 0.37), new Edge(5, 7, 0.28), new Edge(0, 7, 0.16), new Edge(1, 5, 0.32), new Edge(0, 4, 0.38), new Edge(2, 3, 0.17), new Edge(1, 7, 0.19), new Edge(0, 2, 0.26), new Edge(1, 2, 0.36), new Edge(1, 3, 0.29), new Edge(2, 7, 0.34), new Edge(6, 2, 0.40), new Edge(3, 6, 0.52), new Edge(6, 0, 0.58), new Edge(6, 4, 0.93));
+        RelaxBellmanFord relaxBellmanFord = new RelaxBellmanFord();
+        relaxBellmanFord.getSourceToAllNodesShortestPath(edges2, 8);
     }
+
+    /**
+     * What did i learn?
+     * <p>
+     * 1. Applying bellmanford.
+     * 2. It is clear, when there is no source node give, that means it a Minimum spanning tree problem.
+     * 3. bellman ford is used to find the shortest path from source to all vertices (source node should be provided).
+     */
+    static class RelaxBellmanFord {
+        int MAX = 9999;
+
+        public Map<Integer, Integer> getSourceToAllNodesShortestPath(List<Edge> edges, int noVertices) {
+            double[] distances = new double[noVertices];
+            Arrays.fill(distances, MAX);
+            int sourceNode = 0;
+            distances[sourceNode] = 0;
+            Map<Integer, Integer> predecessor = new HashMap<>();
+            for (int i = 0; i < noVertices - 1; i++) {
+                relax(edges, distances, predecessor);
+            }
+            for (int i = 0; i < distances.length; i++) {
+                System.out.println("The cost to reach node " + i + " is " + distances[i]);
+            }
+            return predecessor;
+        }
+
+        private void relax(List<Edge> edges, double[] distances, Map<Integer, Integer> predecessor) {
+            for (Edge edge : edges) {
+                if (distances[edge.from] > distances[edge.to] + edge.weight) {
+                    distances[edge.from] = distances[edge.to] + edge.weight;
+                    predecessor.put(edge.to, edge.from);
+                }
+            }
+        }
+    }
+
 
     /**
      * What did i learn i learned using Kruskal (sorted, Union, MST).
@@ -43,30 +80,7 @@ public class Coding {
             return cost;
         }
 
-        static class Edge {
-            int from;
-            int to;
-            double weight;
 
-            public Edge(int from, int to, double cost) {
-                this.to = to;
-                this.from = from;
-                this.weight = cost;
-            }
-
-            public double getWeight() {
-                return weight;
-            }
-
-            public void setWeight(double weight) {
-                this.weight = weight;
-            }
-
-            @Override
-            public String toString() {
-                return "Edge(" + "from=" + from + ", to=" + to + ", weight=" + weight + '}';
-            }
-        }
 
         private class UnionFind {
             int[] uf;
@@ -229,6 +243,31 @@ public class Coding {
                 }
             }
             return min;
+        }
+    }
+
+    static class Edge {
+        int from;
+        int to;
+        double weight;
+
+        public Edge(int from, int to, double cost) {
+            this.to = to;
+            this.from = from;
+            this.weight = cost;
+        }
+
+        public double getWeight() {
+            return weight;
+        }
+
+        public void setWeight(double weight) {
+            this.weight = weight;
+        }
+
+        @Override
+        public String toString() {
+            return "Edge(" + "from=" + from + ", to=" + to + ", weight=" + weight + '}';
         }
     }
 }
