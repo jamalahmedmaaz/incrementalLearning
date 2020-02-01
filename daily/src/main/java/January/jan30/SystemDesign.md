@@ -1,29 +1,22 @@
 System Design : Blueprint
 
 -------------------------------------------------------------------------------
-|Function | NonFun. | Reliability     | CAP   | Technology |  Security         |
-|Req.     | Req.    | Scalability     |       |            |  vigilance        |
-|         |         | Maintainability |       |            |  Monitoring       |
+|Function | NonFun. | Assumptions | Reliability     |CAP| Technology|Security  |
+|Req.     | Req.    |             | Scalability     |   |           |vigilance |
+|         |         |             | Maintainability |   |           |Monitoring|
 -------------------------------------------------------------------------------
-|         |         |                 |       |            |                   |
-|         |         |                 |       |            |                   |
-|         |         |                 |       |            |                   |
-|         |         |                 |       |            |                   |
-|         |         |                 |       |            |                   |
-|         |         |                 |       |            |                   |
-|         |         |                 |       |            |                   |
-|         |         |                 |       |            |                   |
-|         |         |                 |       |            |                   |
-|         |         |                 |       |            |                   |
-|         |         |                 |       |            |                   |
-|         |         |                 |       |            |                   |
-|         |         |                 |       |            |                   |
-|         |         |                 |       |            |                   |
-|         |         |                 |       |            |                   |
-|         |         |                 |       |            |                   |
+|         |         |             |                 |   |           |          |
+|         |         |             |                 |   |           |          |
+|         |         |             |                 |   |           |          |
+|         |         |             |                 |   |           |          |
+|         |         |             |                 |   |           |          |
+|         |         |             |                 |   |           |          |
+|         |         |             |                 |   |           |          |
+|         |         |             |                 |   |           |          |
+|         |         |             |                 |   |           |          |
+|         |         |             |                 |   |           |          |
+|         |         |             |                 |   |           |          |
 -------------------------------------------------------------------------------
-
-
 
 How to save a website from bots?
 
