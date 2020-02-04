@@ -13,7 +13,7 @@ public class Coding {
      * how do you identify if it is a valid tree.
      */
 
-    class Solution {
+    class GraphValidTree_261 {
         int[] uf;
 
         public boolean validTree(int n, int[][] edges) {

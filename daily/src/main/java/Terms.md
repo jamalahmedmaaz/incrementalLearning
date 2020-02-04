@@ -36,3 +36,8 @@ CONSENSUS
 
 DURABLE
 
+API Gateway
+
+Zuul
+
+Service Discovery

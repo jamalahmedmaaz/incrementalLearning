@@ -6,6 +6,16 @@ import java.util.Set;
 import java.util.Stack;
 public class Coding {
 
+    /**
+     * Algorithm:
+     * <p>
+     * 1. Start from top (cursor = root)
+     * 2. Set (lefts next) of cursor to cursors right. cursor.left.next = cursor.right;
+     * 3. Now try to do the same with right BUT remember right side can be null.
+     * cursor.right.next = (cursor.next == null ? null : cursor.left)
+     * 4. move cursor to next subtree. cursor = cursor.next;
+     * 5. move root to left, root = root.left;
+     */
     class PopulateNextPointer {
 
         public void connect(NextPointerNode root) {
@@ -28,7 +38,8 @@ public class Coding {
     }
 
     /**
-     * THIS PROBLEM FOR ME IS A DISASTER I HAVE DONE CRAPPY THINGS POSSIBLE. IT DOESNT FEEL GOOD NEED TO DO THIS AGAIN.
+     * THIS PROBLEM FOR ME IS A DISASTER I HAVE DONE CRAPPY THINGS POSSIBLE.
+     * IT DOESNT FEEL GOOD NEED TO DO THIS AGAIN.
      */
     class ConstructBinaryTreeFromString {
 
