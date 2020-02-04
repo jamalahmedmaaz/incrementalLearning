@@ -1,6 +1,5 @@
 package January.jan25;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.PriorityQueue;
 public class Coding {
@@ -25,9 +24,9 @@ public class Coding {
             if (max.size() < min.size()) {
                 max.add(min.poll());
             }
-            System.out.println("Adding... " + num);
-            System.out.println("Max " + Arrays.toString(max.toArray()));
-            System.out.println("Min " + Arrays.toString(min.toArray()));
+//            System.out.println("Adding... " + num);
+//            System.out.println("Max " + Arrays.toString(max.toArray()));
+//            System.out.println("Min " + Arrays.toString(min.toArray()));
         }
 
         public double findMedian() {

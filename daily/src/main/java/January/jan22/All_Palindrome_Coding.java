@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 /**
- * The type Coding.
+ * The type All_Palindrome_Coding.
  */
-public class Coding {
+public class All_Palindrome_Coding {
 
     /**
      * The type Palindrome partitioning.
