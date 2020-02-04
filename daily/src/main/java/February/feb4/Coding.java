@@ -2,10 +2,7 @@ package February.feb4;
 
 import javafx.util.Pair;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 public class Coding {
     /**
      * 763. Partition Labels
@@ -286,6 +283,62 @@ public class Coding {
                 return ++count;
             }
             return -1;
+        }
+    }
+
+    /**
+     * 1062. Longest Repeating Substring
+     * <p>
+     * Given a string S, find out the length of the longest repeating substring(s).
+     * Return 0 if no repeating substring exists.
+     * <p>
+     * <p>
+     * <p>
+     * Example 1:
+     * <p>
+     * Input: "abcd"
+     * Output: 0
+     * Explanation: There is no repeating substring.
+     * Example 2:
+     * <p>
+     * Input: "abbaba"
+     * Output: 2
+     * Explanation: The longest repeating substrings are "ab" and "ba", each of which occurs twice.
+     * Example 3:
+     * <p>
+     * Input: "aabcaabdaab"
+     * Output: 3
+     * Explanation: The longest repeating substring is "aab", which occurs 3 times.
+     * Example 4:
+     * <p>
+     * Input: "aaaaa"
+     * Output: 4
+     * Explanation: The longest repeating substring is "aaaa", which occurs twice.
+     * <p>
+     * <p>
+     * Note:
+     * <p>
+     * The string S consists of only lowercase English letters from 'a' - 'z'.
+     * 1 <= S.length <= 1500`
+     */
+    class LongestRepeatingSubstring {
+        public int longestRepeatingSubstring(String S) {
+            Map<String, Integer> map = new HashMap();
+            String result = "";
+            //Start from building a large substring
+            // and then if not repeated then go inside to create smaller string.
+            for (int i = S.length(); i >= 1; i--) {
+                for (int j = 0; j < S.length() && j + i <= S.length(); j++) {
+                    String s = S.substring(j, j + i);
+                    map.put(s, map.getOrDefault(s, 0) + 1);
+                    if (result.length() < S.length() && 1 < map.get(s)) {
+                        return s.length();
+                    }
+                }
+                //Very neat trick
+                map.clear();
+            }
+            return result.length();
         }
     }
 }
