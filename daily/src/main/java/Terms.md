@@ -28,16 +28,21 @@ OPERABILITY
 
 SIMPLICITY
 
-EVOLVABILITY
+EVOLVABILITY - Evolvability is defined as the capacity of a system for adaptive evolution.
 
-BACKPRESSURE
+BACK-PRESSURE
 
 CONSENSUS
 
-DURABLE
+DURABLE - able to withstand wear, pressure, or damage; hard-wearing.
 
-API Gateway
+API Gateway - Zuul/API Gateway
 
-Zuul
+Zuul - API Gateway (competitor nginx)
 
-Service Discovery
+Service Discovery - Eureka
+
+MOM - Message Oriented Middle-ware.
+
+Data proximity - How close one data elements is to other, physically. 
+
