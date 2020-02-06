@@ -22,3 +22,15 @@ FROM feeditem fe
   AND uf.userid = '3' AND uf.type IN ('1', '2')
 ORDER BY fe.createddate DESC
 LIMIT 100;
+
+
+--- Doing this on cassandra.
+
+SELECT entityorfriendid
+FROM userfollow
+WHERE userid = '3';
+
+SELECT feeditemid
+FROM feeditem
+WHERE userid IN ("previous query
+entityorfriendid");
