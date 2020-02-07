@@ -1,4 +1,4 @@
-System Design : Blueprint
+System Design : 
 
 -------------------------------------------------------------------------------
 |Function | NonFun. | Assumptions | Reliability     |CAP| Technology|Security  |
@@ -17,6 +17,16 @@ System Design : Blueprint
 |         |         |             |                 |   |           |          |
 |         |         |             |                 |   |           |          |
 -------------------------------------------------------------------------------
+
+
+Measurements/Estimates:
+
+1. Traffic Estimates:
+2. Storage Estimates:
+3. Bandwidth Estimates:
+4. Memory Estimates:
+
+
 
 How to save a website from bots?
 
