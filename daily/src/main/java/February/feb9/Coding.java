@@ -328,4 +328,43 @@ public class Coding {
         }
     }
 
+    class RangeSumQuery2D_Immutable {
+        int[][] prefixsum;
+
+        public RangeSumQuery2D_Immutable(int[][] matrix) {
+            if (matrix == null || matrix.length == 0) {
+                return;
+            }
+            int r = matrix.length;
+            int c = matrix[0].length;
+            prefixsum = new int[r + 1][c + 1];
+
+            for (int i = 1; i < prefixsum.length; i++) {
+                for (int j = 1; j < prefixsum[i].length; j++) {
+                    prefixsum[i][j] = prefixsum[i - 1][j] //Top
+                            + prefixsum[i][j - 1] //left
+                            - prefixsum[i - 1][j - 1] // sub diagonal its already added.
+                            + matrix[i - 1][j - 1]; //Current value;
+                }
+            }
+            // System.out.println(Arrays.deepToString(prefixsum));
+        }
+
+        public int sumRegion(int row1, int col1, int row2, int col2) {
+            if (prefixsum == null || prefixsum.length == 0) {
+                return 0;
+            }
+            //Increment everything because you have used a +1 more size prefixsum
+            row1++;
+            col1++;
+            row2++;
+            col2++;
+            return prefixsum[row2][col2] // Take the end of rectangle or square.
+                    - prefixsum[row1 - 1][col2] // remove the top area
+                    - prefixsum[row2][col1 - 1] // remove the left area
+                    + prefixsum[row1 - 1][col1 - 1]; // add back diagonal
+            // because you delete top and left, so it got deleted two times
+        }
+    }
+
 }
