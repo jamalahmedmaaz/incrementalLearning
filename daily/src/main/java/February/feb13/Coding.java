@@ -25,8 +25,7 @@ public class Coding {
                 for (int second = first + 1; second < A.length; second++) {
                     int secondValue = A[second];
                     int diff = secondValue - firstValue;
-                    //increase the count of secondvalue index
-                    //With that difference
+                    //Append the count of first value to second value (based on diff)
                     dp[second].put(diff, dp[first].getOrDefault(diff, 1) + 1);
                     res = Math.max(res, dp[second].get(diff));
                 }
