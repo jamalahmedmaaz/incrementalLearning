@@ -14,26 +14,24 @@ public class Coding {
             if (A.length <= 1) {
                 return A.length;
             }
-            int longest = 0;
-            HashMap<Integer, Integer>[] dp = new HashMap[A.length];
-            for (int i = 0; i < A.length; i++) {
+            int res = 2;
+            int n = A.length;
+            HashMap<Integer, Integer>[] dp = new HashMap[n];
+            for (int i = 0; i < n; i++) {
                 dp[i] = new HashMap<>();
             }
-            for (int i = 1; i < A.length; i++) {
-                int firstValue = A[i];
-                for (int j = 0; j < i; j++) {
-                    int secondValue = A[j];
-                    int diff = firstValue - secondValue;
-                    int len = 2;
-                    if (dp[j].containsKey(diff)) {
-                        len = dp[j].get(diff) + 1;
-                    }
-                    int curr = dp[j].getOrDefault(diff, 0);
-                    dp[i].put(diff, Math.max(curr, len));
-                    longest = Math.max(longest, dp[i].get(diff));
+            for (int first = 0; first < A.length; first++) {
+                int firstValue = A[first];
+                for (int second = first + 1; second < A.length; second++) {
+                    int secondValue = A[second];
+                    int diff = secondValue - firstValue;
+                    //increase the count of secondvalue index
+                    //With that difference
+                    dp[second].put(diff, dp[first].getOrDefault(diff, 1) + 1);
+                    res = Math.max(res, dp[second].get(diff));
                 }
             }
-            return longest;
+            return res;
         }
     }
 }
