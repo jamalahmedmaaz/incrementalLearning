@@ -367,4 +367,48 @@ public class Coding {
         }
     }
 
+    /**
+     * This is a very good problem
+     * <p>
+     * "1234"
+     * <p>
+     * if you want to create 1 + 2 + 3 * 4 =>
+     * <p>
+     * <p>
+     * You actually need to do => (1 + 2 + 3) - 3 + (3 * 4)
+     */
+    class Solution {
+        List<String> result = new ArrayList();
+        String num;
+        int target;
+
+        public List<String> addOperators(String num, int target) {
+            this.num = num;
+            this.target = target;
+            rec("", 0, 0, 0);
+            return result;
+        }
+
+        public void rec(String exp, int idx, long tmpTarget, long nextMult) {
+            if (idx == num.length()) {
+                if (tmpTarget == target) {
+                    result.add(exp);
+                }
+            } else {
+                for (int i = idx; i < num.length(); i++) {
+                    if (i != idx && num.charAt(idx) == '0') {
+                        break;
+                    }
+                    long curNo = Long.parseLong(num.substring(idx, i + 1));
+                    if (idx == 0) {
+                        rec(exp + curNo, i + 1, curNo, curNo);
+                    } else {
+                        rec(exp + "+" + curNo, i + 1, tmpTarget + curNo, curNo);
+                        rec(exp + "-" + curNo, i + 1, tmpTarget - curNo, -curNo);
+                        rec(exp + "*" + curNo, i + 1, tmpTarget - nextMult + (curNo * nextMult), curNo * nextMult);
+                    }
+                }
+            }
+        }
+    }
 }
