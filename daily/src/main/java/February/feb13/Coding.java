@@ -1,6 +1,9 @@
 package February.feb13;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
 public class Coding {
 
     /**
@@ -31,6 +34,86 @@ public class Coding {
                 }
             }
             return res;
+        }
+    }
+
+    class IslandPerimeter {
+        public int islandPerimeter(int[][] grid) {
+
+            int islands = 0;
+            int neighbours = 0;
+
+            for (int i = 0; i < grid.length; i++) {
+                for (int j = 0; j < grid[0].length; j++) {
+                    if (grid[i][j] == 1) {
+                        islands++;
+
+                        if (i + 1 < grid.length && grid[i + 1][j] == 1) {
+                            neighbours++;
+                        }
+
+                        if (j + 1 < grid[i].length && grid[i][j + 1] == 1) {
+                            neighbours++;
+                        }
+                    }
+                }
+            }
+
+            return islands * 4 - 2 * neighbours;
+        }
+    }
+
+    class MinDepth {
+        int result = Integer.MAX_VALUE;
+
+        public int minDepth(MinDepthTreeNode root) {
+            if (root == null) {
+                return 0;
+            }
+            rec(root, 1);
+            return result;
+        }
+
+        public void rec(MinDepthTreeNode root, int height) {
+            if (root == null) {
+                return;
+            }
+
+            if (root.left == null && root.right == null) {
+                result = Math.min(result, height);
+                return;
+            }
+
+            rec(root.left, height + 1);
+            rec(root.right, height + 1);
+        }
+
+        class MinDepthTreeNode {
+
+            public MinDepthTreeNode left;
+            public MinDepthTreeNode right;
+        }
+    }
+
+    class PickRandomDuplicateNumberIndex {
+        Map<Integer, Queue<Integer>> map = new HashMap();
+
+        public PickRandomDuplicateNumberIndex(int[] nums) {
+            for (int i = 0; i < nums.length; i++) {
+                if (!map.containsKey(nums[i])) {
+                    map.put(nums[i], new LinkedList());
+                }
+                map.get(nums[i]).add(i);
+            }
+        }
+
+        public int pick(int target) {
+            if (map.containsKey(target)) {
+                int ele = map.get(target).poll();
+                map.get(target).add(ele);
+                return ele;
+            }
+            return -1;
         }
     }
 }
