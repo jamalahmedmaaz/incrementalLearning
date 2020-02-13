@@ -43,20 +43,20 @@ public class Coding {
             if (s2.length() < s1.length()) {
                 return false;
             }
-            int[] s1Map = new int[26];
+            int[] s1a = new int[26];
             for (char c : s1.toCharArray()) {
-                s1Map[c - 'a']++;
+                s1a[c - 'a']++;
             }
-            int s1Len = s1.length();
-            char[] s2Chars = s2.toCharArray();
-            int[] s2Map = new int[26];
-            for (int i = 0; i < s2Chars.length; i++) {
-                s2Map[s2Chars[i] - 'a']++;
-                if (i >= s1Len) {
-                    s2Map[s2Chars[i - s1Len] - 'a']--;
-
+            int s1Length = s1.length();
+            int[] s2a = new int[26];
+            for (int i = 0; i < s2.length(); i++) {
+                int idx = s2.charAt(i) - 'a';
+                s2a[idx]++;
+                if (i >= s1Length) {
+                    int previousIdx = s2.charAt(i - s1Length) - 'a';
+                    s2a[previousIdx]--;
                 }
-                if (match(s1Map, s2Map)) {
+                if (match(s1a, s2a)) {
                     return true;
                 }
             }
@@ -98,4 +98,84 @@ public class Coding {
             return n > m;
         }
     }
+
+    class InsertIntoCircularLinkedList {
+        public CircularNode insert(CircularNode start, int x) {
+            if (start == null) {
+                CircularNode cur = new CircularNode(x);
+                cur.next = cur;
+                return cur;
+            }
+            CircularNode currentNode = start.next;
+            CircularNode previousNode = start;
+            boolean found = false;
+            while (currentNode != start) {
+                int currentVal = currentNode.val;
+                int previousVal = previousNode.val;
+                //All the conditions you will land into to find the current and previous node
+                // IN-BETWEEN which you have to insert.
+                if ((x == previousVal) ||
+                        (x <= currentVal && x > previousVal) ||
+                        (currentVal < previousVal && x > previousVal) ||
+                        (currentVal < previousVal && x < currentVal)) {
+                    found = true;
+                    CircularNode node = new CircularNode(x);
+                    previousNode.next = node;
+                    node.next = currentNode;
+                    break;
+                }
+                previousNode = currentNode;
+                currentNode = currentNode.next;
+            }
+            if (!found) {
+                CircularNode node = new CircularNode(x);
+                previousNode.next = node;
+                node.next = currentNode;
+            }
+            return start;
+        }
+
+        class CircularNode {
+            public CircularNode next;
+            public int val;
+
+            public CircularNode(int x) {
+                this.val = x;
+            }
+        }
+    }
+
+    public class NextPermutationOfAGivenArray {
+        
+        public void nextPermutation(int[] nums) {
+            int i = nums.length - 2;
+            while (i >= 0 && nums[i + 1] <= nums[i]) {
+                i--;
+            }
+            if (i >= 0) {
+                int j = nums.length - 1;
+                while (j >= 0 && nums[j] <= nums[i]) {
+                    j--;
+                }
+                swap(nums, i, j);
+            }
+            reverse(nums, i + 1);
+        }
+
+        private void reverse(int[] nums, int start) {
+            int i = start, j = nums.length - 1;
+            while (i < j) {
+                swap(nums, i, j);
+                i++;
+                j--;
+            }
+        }
+
+        private void swap(int[] nums, int i, int j) {
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+        }
+    }
+
 }
