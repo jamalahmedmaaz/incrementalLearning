@@ -1,6 +1,10 @@
 package February.feb14;
 
 import javafx.util.Pair;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 public class Coding {
 
     class SubtreeWithAllDeepest {
@@ -146,7 +150,7 @@ public class Coding {
     }
 
     public class NextPermutationOfAGivenArray {
-        
+
         public void nextPermutation(int[] nums) {
             int i = nums.length - 2;
             while (i >= 0 && nums[i + 1] <= nums[i]) {
@@ -175,6 +179,39 @@ public class Coding {
             int temp = nums[i];
             nums[i] = nums[j];
             nums[j] = temp;
+        }
+    }
+
+    class ThressSumNonDuplicateResult {
+        public List<List<Integer>> threeSum(int[] nums) {
+            List<List<Integer>> result = new ArrayList();
+            Arrays.sort(nums);
+            for (int i = 0; i < nums.length; i++) {
+                if (i != 0 && nums[i] == nums[i - 1]) {
+                    continue;
+                }
+                int left = i + 1;
+                int right = nums.length - 1;
+                while (left < right) {
+                    int tmp = nums[i] + nums[left] + nums[right];
+                    if (tmp == 0) {
+                        result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                        while (left < right && nums[right] == nums[right - 1]) {
+                            right--;
+                        }
+                        while (left < right && nums[left] == nums[left + 1]) {
+                            left++;
+                        }
+                        left++;
+                        right--;
+                    } else if (tmp > 0) {
+                        right--;
+                    } else {
+                        left++;
+                    }
+                }
+            }
+            return result;
         }
     }
 
