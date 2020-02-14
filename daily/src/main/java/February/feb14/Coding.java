@@ -104,26 +104,26 @@ public class Coding {
     }
 
     class InsertIntoCircularLinkedList {
-        public CircularNode insert(CircularNode start, int x) {
-            if (start == null) {
-                CircularNode cur = new CircularNode(x);
+        public CircularNode insert(CircularNode head, int insertVal) {
+            if (head == null) {
+                CircularNode cur = new CircularNode(insertVal);
                 cur.next = cur;
                 return cur;
             }
-            CircularNode currentNode = start.next;
-            CircularNode previousNode = start;
+            CircularNode currentNode = head.next;
+            CircularNode previousNode = head;
             boolean found = false;
-            while (currentNode != start) {
+            while (currentNode != head) {
                 int currentVal = currentNode.val;
                 int previousVal = previousNode.val;
                 //All the conditions you will land into to find the current and previous node
                 // IN-BETWEEN which you have to insert.
-                if ((x == previousVal) ||
-                        (x <= currentVal && x > previousVal) ||
-                        (currentVal < previousVal && x > previousVal) ||
-                        (currentVal < previousVal && x < currentVal)) {
+                if ((insertVal == previousVal) ||
+                        (insertVal <= currentVal && insertVal > previousVal) ||
+                        (currentVal < previousVal && insertVal > previousVal) ||
+                        (currentVal < previousVal && insertVal < currentVal)) {
                     found = true;
-                    CircularNode node = new CircularNode(x);
+                    CircularNode node = new CircularNode(insertVal);
                     previousNode.next = node;
                     node.next = currentNode;
                     break;
@@ -132,11 +132,11 @@ public class Coding {
                 currentNode = currentNode.next;
             }
             if (!found) {
-                CircularNode node = new CircularNode(x);
+                CircularNode node = new CircularNode(insertVal);
                 previousNode.next = node;
                 node.next = currentNode;
             }
-            return start;
+            return head;
         }
 
         class CircularNode {
