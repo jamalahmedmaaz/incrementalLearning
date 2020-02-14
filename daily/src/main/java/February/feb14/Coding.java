@@ -149,36 +149,62 @@ public class Coding {
         }
     }
 
-    public class NextPermutationOfAGivenArray {
+    class NextPermutationOfGivenArray {
+        int[] A;
 
         public void nextPermutation(int[] nums) {
-            int i = nums.length - 2;
-            while (i >= 0 && nums[i + 1] <= nums[i]) {
-                i--;
+            this.A = nums;
+            int k = -1;
+            k = findTheNextDecreasingElement();
+
+            /**
+             * If it is the last order just sort and return.
+             * because the next permutation will be reverse of what is present now
+             */
+            if (k == -1) {
+                Arrays.sort(nums);
+                return;
             }
-            if (i >= 0) {
-                int j = nums.length - 1;
-                while (j >= 0 && nums[j] <= nums[i]) {
-                    j--;
+
+            // Find the largest index l greater than k such that a[k] < a[l].
+            int l = k + 1;
+            l = findLargestElementGreaterThaneKthIndex(k, l);
+
+            // Swap the value of a[k] with that of a[l].
+            swapTheValues(k, l);
+
+            // Reverse the sequence from a[k + 1] up to and including the final element a[n].
+            int tmp;
+            for (int i = 1; k + i < A.length - i; i++) {
+                tmp = A[k + i];
+                A[k + i] = A[A.length - i];
+                A[A.length - i] = tmp;
+            }
+        }
+
+        private void swapTheValues(int k, int l) {
+            int tmp = A[k];
+            A[k] = A[l];
+            A[l] = tmp;
+        }
+
+        private int findLargestElementGreaterThaneKthIndex(int k, int l) {
+            for (int i = k + 2; i < A.length; i++) {
+                if (A[k] < A[i]) {
+                    l = i;
                 }
-                swap(nums, i, j);
             }
-            reverse(nums, i + 1);
+            return l;
         }
 
-        private void reverse(int[] nums, int start) {
-            int i = start, j = nums.length - 1;
-            while (i < j) {
-                swap(nums, i, j);
-                i++;
-                j--;
+        private int findTheNextDecreasingElement() {
+            int k = -1;
+            for (int i = 0; i < A.length - 1; i++) {
+                if (A[i] < A[i + 1]) {
+                    k = i;
+                }
             }
-        }
-
-        private void swap(int[] nums, int i, int j) {
-            int temp = nums[i];
-            nums[i] = nums[j];
-            nums[j] = temp;
+            return k;
         }
     }
 
@@ -215,4 +241,28 @@ public class Coding {
         }
     }
 
+    public class FindFirstBadVersion extends VersionControl {
+        public int firstBadVersion(int n) {
+            int low = 1;
+            int high = n;
+            while (low < high) {
+                int mid = low + ((high - low) / 2);
+                boolean midResult = isBadVersion(mid);
+                if (midResult) {
+                    high = mid;
+                } else {
+                    //This is the key. Missing a mid + 1, Infinite loop it will go
+                    low = mid + 1;
+                }
+            }
+            return low;
+        }
+
+    }
+
+    class VersionControl {
+        public boolean isBadVersion(int mid) {
+            return false;
+        }
+    }
 }
