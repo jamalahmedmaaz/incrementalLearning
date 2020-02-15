@@ -6,6 +6,11 @@ public class OOAD {
         RateLimiter_I rt = new RateLimiter_I();
         String u1 = UUID.randomUUID().toString();
         while (true) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println(rt.canConsumeResource(u1));
         }
 
