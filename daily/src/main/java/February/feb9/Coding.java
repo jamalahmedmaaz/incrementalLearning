@@ -377,7 +377,7 @@ public class Coding {
      * <p>
      * You actually need to do => (1 + 2 + 3) - 3 + (3 * 4)
      */
-    class Solution {
+    class ExpressionAddOperators {
         List<String> result = new ArrayList();
         String num;
         int target;
@@ -389,26 +389,69 @@ public class Coding {
             return result;
         }
 
-        public void rec(String exp, int idx, long tmpTarget, long nextMult) {
+        public void rec(String exp, int idx, long tmpTarget, long prevNumber) {
             if (idx == num.length()) {
                 if (tmpTarget == target) {
                     result.add(exp);
                 }
             } else {
                 for (int i = idx; i < num.length(); i++) {
+                    /**
+                     * Special case number should not start with zero.
+                     */
                     if (i != idx && num.charAt(idx) == '0') {
                         break;
                     }
                     long curNo = Long.parseLong(num.substring(idx, i + 1));
+                    /**
+                     * First condition.
+                     */
                     if (idx == 0) {
                         rec(exp + curNo, i + 1, curNo, curNo);
                     } else {
+                        /**
+                         * a + b => target + current, current.
+                         * a - b => target - current, (-)current = -current.
+                         * a * b => target - prevCurrent + (current * prevCurrent),  current * prevCurrent  (prevCurrent
+                         * is only used here)
+                         *
+                         *
+                         * prevCurrent = x
+                         *
+                         * so how to do this => tmpTarget * b =>
+                         *
+                         * tmpTarget - prevCurrent + (current * prevCurrent)
+                         *
+                         */
                         rec(exp + "+" + curNo, i + 1, tmpTarget + curNo, curNo);
                         rec(exp + "-" + curNo, i + 1, tmpTarget - curNo, -curNo);
-                        rec(exp + "*" + curNo, i + 1, tmpTarget - nextMult + (curNo * nextMult), curNo * nextMult);
+                        rec(exp + "*" + curNo, i + 1, tmpTarget - prevNumber + (curNo * prevNumber), curNo * prevNumber);
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * There are n bulbs that are initially off. You first turn on all the
+     * bulbs. Then, you turn off every second bulb. On the third round, you
+     * toggle every third bulb (turning on if it's off or turning off if it's
+     * on). For the i-th round, you toggle every i bulb. For the n-th round,
+     * you only toggle the last bulb. Find how many bulbs are on after n rounds.
+     */
+    class BulbSwitch_EvenAndOdd {
+        public int bulbSwitch(int n) {
+            return (int) Math.sqrt(n);
+        }
+
+        int bulbSwitch_better(int n) {
+            int counts = 0;
+
+            for (int i = 1; i * i <= n; ++i) {
+                ++counts;
+            }
+
+            return counts;
         }
     }
 }
