@@ -863,6 +863,98 @@ public class CompleteDyanmicProgramming {
             return dp[ns][nt] == ns;
         }
     }
+
+    class LongestArithSeqLength {
+
+        /**
+         * Time Limit exceeded.
+         */
+        Map<Integer, Map<Integer, Integer>> dp = new HashMap();
+        int[] A;
+
+        public int longestArithSeqLength_BEST(int[] A) {
+            if (A == null || A.length == 0) {
+                return 0;
+            }
+            int n = A.length, result = 0;
+            int[][] dp = new int[n][n];
+            int[] index = new int[20001];
+
+            for (int first = 0; first < n; first++) {
+                for (int second = first + 1; second < n; second++) {
+                    int previousValue = A[first] - (A[second] - A[first]);
+                    if (previousValue < 0 || index[previousValue] == 0) {
+                        continue;
+                    }
+                    int idx = index[previousValue] - 1;
+                    dp[first][second] = dp[idx][first] + 1;
+                    result = Math.max(result, dp[first][second]);
+                }
+                int firstIndex = A[first];
+                index[firstIndex] = first + 1;
+            }
+            return result + 2;
+        }
+
+        public int longestArithSeqLength(int[] A) {
+            if (A.length <= 1) {
+                return A.length;
+            }
+            int res = 2;
+            int n = A.length;
+            HashMap<Integer, Integer>[] dp = new HashMap[n];
+            for (int i = 0; i < n; i++) {
+                dp[i] = new HashMap<>();
+            }
+            for (int first = 0; first < A.length; first++) {
+                int firstValue = A[first];
+                for (int second = first + 1; second < A.length; second++) {
+                    int secondValue = A[second];
+                    int diff = secondValue - firstValue;
+                    //Append the count of first value to second value (based on diff)
+                    dp[second].put(diff, dp[first].getOrDefault(diff, 1) + 1);
+                    res = Math.max(res, dp[second].get(diff));
+                }
+            }
+            return res;
+        }
+
+        public int longestArithSeqLength_Recursive(int[] A) {
+            this.A = A;
+            int max = 2;
+            for (int i = 0; i < A.length; i++) {
+                for (int j = i + 1; j < A.length; j++) {
+                    max = Math.max(max, 2 + rec(i, A[j] - A[i]));
+                }
+            }
+            // System.out.println(dp);
+            return max;
+        }
+
+        private int rec(int idx, int diff) {
+            if (idx < 0) {
+                return 0;
+            }
+            if (dp.containsKey(idx)
+                    && dp.get(idx).containsKey(diff)
+                    && dp.get(idx).get(diff) != 0) {
+                return dp.get(idx).get(diff);
+            }
+            int max = 0;
+            for (int i = idx - 1; i >= 0; i--) {
+                if (A[idx] - A[i] == diff) {
+                    max = Math.max(max, 1 + rec(i, diff));
+                }
+            }
+            if (!dp.containsKey(idx)) {
+                dp.put(idx, new HashMap<>());
+            }
+            dp.get(idx).put(diff, 0);
+            return max;
+        }
+
+    }
+
 }
 
 class TreeNode {
