@@ -100,6 +100,15 @@
     call:
     
     O(T) = R * O(s);
+    
+9. BitCount - Kth Symbol in Grammar. Given N and K, find the Kth (K-1), value
+    of string.
+
+        **class Solution {
+            public int kthGrammar(int N, int K) {
+                return Integer.bitCount(K - 1) % 2;
+            }
+        }**
 
 12. Validate Parenthesis Balancing
 
