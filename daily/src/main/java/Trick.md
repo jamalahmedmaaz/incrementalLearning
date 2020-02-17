@@ -51,8 +51,48 @@
             head.next = null;
             return p;
         }**
-         
-6. Validate Parenthesis Balancing
+
+6. Search in Binary Search Tree RECURSION.
+
+        **public TreeNode searchBST(TreeNode root, int val) {
+            if(root == null)
+                return root;
+            if(root.val > val){
+                return searchBST(root.left, val);
+            }else if(root.val < val){
+                return searchBST(root.right, val);
+            }
+            return root;
+        }**
+
+7. Pascals Triangle return a row of pascal triangle RECURSION
+
+        **f(row,col) = f(row-1,col-1) + f(row-1,col);**
+    
+        **private int getNum(int row, int col) {
+            if (row == 0 || col == 0 || row == col) {
+                return 1;
+            }
+            String key = row + "_" + col;
+            if(dp.containsKey(key)){
+                return dp.get(key);
+            }
+            int val = getNum(row - 1, col - 1) + getNum(row - 1, col);
+            dp.put(key,val);
+            return val;
+        }
+    
+        public List<Integer> getRow(int rowIndex) {
+            List<Integer> ans = new ArrayList<>();
+            for (int i = 0; i <= rowIndex; i++) {
+                ans.add(getNum(rowIndex, i));
+            }
+            return ans;
+        }**
+
+
+
+12. Validate Parenthesis Balancing
 
         **public boolean balanced(String s){
             int count = 0;
