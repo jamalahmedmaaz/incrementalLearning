@@ -68,6 +68,7 @@
 7. Pascals Triangle return a row of pascal triangle RECURSION
 
         **f(row,col) = f(row-1,col-1) + f(row-1,col);**
+        
     
         **private int getNum(int row, int col) {
             if (row == 0 || col == 0 || row == col) {
