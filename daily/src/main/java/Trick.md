@@ -33,18 +33,28 @@
 
 4. Reversing pairs of elements RECURSION.
 
-         **public ListNode swapPairs(ListNode head) {
-                if(head == null || head.next == null)
-                    return head;
-                ListNode next = head.next;
-                head.next = swapPairs(head.next.next);
-                next.next = head;
-                return next;
-         }**
-         
-5. Validate Parenthesis Balancing
+        **public ListNode swapPairs(ListNode head) {
+            if(head == null || head.next == null)
+                return head;
+            ListNode next = head.next;
+            head.next = swapPairs(head.next.next);
+            next.next = head;
+            return next;
+        }**
 
-       **public boolean balanced(String s){
+5. Reverse complete Linked List RECURSION.
+
+        **public ListNode reverseList(ListNode head) {
+            if (head == null || head.next == null) return head;
+            ListNode p = reverseList(head.next);
+            head.next.next = head;
+            head.next = null;
+            return p;
+        }**
+         
+6. Validate Parenthesis Balancing
+
+        **public boolean balanced(String s){
             int count = 0;
             for(int i = 0 ; i < s.length(); i++){
                 char c = s.charAt(i);
