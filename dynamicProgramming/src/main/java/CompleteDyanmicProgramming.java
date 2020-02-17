@@ -175,41 +175,43 @@ public class CompleteDyanmicProgramming {
         return cache[i][j] = min;
     }
 
-    /**
-     * Unique Binary Search Trees II
-     *
-     * @param n
-     * @return
-     */
-    public List<TreeNode> generateTrees(int n) {
-        if (n != 0) {
-            return rec(1, n);
-        } else {
-            return new ArrayList();
-        }
-    }
-
-    public List<TreeNode> rec(int start, int end) {
-        List<TreeNode> result = new ArrayList();
-
-        if (start > end) {
-            result.add(null);
-            return result;
-        }
-
-        for (int i = start; i <= end; i++) {
-            List<TreeNode> left = rec(start, i - 1);
-            List<TreeNode> right = rec(i + 1, end);
-            for (TreeNode l : left) {
-                for (TreeNode r : right) {
-                    TreeNode cursor = new TreeNode(i);
-                    cursor.left = l;
-                    cursor.right = r;
-                    result.add(cursor);
-                }
+    class GenerateTreesUniqueBinarySearchTreesII {
+        /**
+         * Unique Binary Search Trees II
+         *
+         * @param n
+         * @return
+         */
+        public List<TreeNode> generateTrees(int n) {
+            if (n != 0) {
+                return rec(1, n);
+            } else {
+                return new ArrayList();
             }
         }
-        return result;
+
+        public List<TreeNode> rec(int start, int end) {
+            List<TreeNode> result = new ArrayList();
+
+            if (start > end) {
+                result.add(null);
+                return result;
+            }
+
+            for (int i = start; i <= end; i++) {
+                List<TreeNode> left = rec(start, i - 1);
+                List<TreeNode> right = rec(i + 1, end);
+                for (TreeNode l : left) {
+                    for (TreeNode r : right) {
+                        TreeNode cursor = new TreeNode(i);
+                        cursor.left = l;
+                        cursor.right = r;
+                        result.add(cursor);
+                    }
+                }
+            }
+            return result;
+        }
     }
 
     class UniqueBinarySearchTrees {
