@@ -91,7 +91,15 @@
             return ans;
         }**
 
+8. Recursive algorithm Time complexity calculation
 
+    Given a recursion algorithm, its time complexity 
+    O(T) is typically the product of the number of recursion 
+    invocations (denoted as R) and the time complexity of calculation 
+    (denoted as O(s)) that incurs along with each recursion 
+    call:
+    
+    O(T) = R * O(s);
 
 12. Validate Parenthesis Balancing
 
