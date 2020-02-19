@@ -101,6 +101,7 @@
     
     O(T) = R * O(s);
     
+    
 9. BitCount - Kth Symbol in Grammar. Given N and K, find the Kth (K-1), value
     of string.
 
@@ -109,6 +110,29 @@
                 return Integer.bitCount(K - 1) % 2;
             }
         }**
+
+10. When a 2D matrix is given with sorted rows and sorted columns. You can think
+    as you are creating a 1D matrix (intuition you will see elements are 
+    sorted). Now what is the low and high (to do Binary Search).
+    
+    ```low = 0; high = r * c - 1;
+    mid = low + (high - low) /2;
+    
+    midEle = A[mid / c ][ mid % c ];```
+
+11. Finding Contiguous of anything (example: number of Contiguous elements 
+    equal K).
+    
+    
+        map.put(0,1);               //Because when you reach sum-k == 0.
+        for(int ele : nums){
+            sum = sum + ele;
+            if(map.containsKey(sum-k)){
+                count = count + map.get(sum-k);
+            }
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
+        }
+      
 
 12. Validate Parenthesis Balancing
 
