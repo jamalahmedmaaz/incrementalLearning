@@ -145,4 +145,20 @@
                 if(count < 0) return false;
             }
             return count == 0;
-        }**         
+        }**        
+
+13. Binary Tree Iterator.
+    1. Use Stack to add the all left most element in stack (O(log(N)).
+    2. hasNext => !stack.isEmpty()
+    3. next() => 
+    
+       **public int next() {
+           TreeNode current = stack.pop();
+           pushAll(current.right);
+           return current.val;
+       }**
+
+14.
+           
+    
+    
