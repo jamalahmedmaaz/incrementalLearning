@@ -52,6 +52,13 @@
             return lastNode;
         }**
 
+            
+        U Turn Operation on LinledList. (making train compartments
+        reversely linked)
+        
+        **head.next.next = head;
+        head.next = head;**
+        
 6. Search in Binary Search Tree RECURSION.
 
         **public TreeNode searchBST(TreeNode root, int val) {
@@ -64,13 +71,7 @@
             }
             return root;
         }**
-        
-        U Turn Operation on LinledList. (making train compartments
-        reversely linked)
-        
-        **head.next.next = head;
-        head.next = head;**
-        
+
 
 7. Pascals Triangle return a row of pascal triangle RECURSION
 
@@ -102,11 +103,11 @@
 
     Given a recursion algorithm, its time complexity 
     O(T) is typically the product of the number of recursion 
-    invocations (denoted as R) and the time complexity of calculation 
-    (denoted as O(s)) that incurs along with each recursion 
+    invocations (denoted as RCals) and the time complexity of calculation 
+    (denoted as O(calculation)) that incurs along with each recursion 
     call:
     
-    O(T) = R * O(s);
+    O(T) = RCals * O(calculation);
     
     
 9. BitCount - Kth Symbol in Grammar. Given N and K, find the Kth (K-1), value
