@@ -1,5 +1,5 @@
 1. Prefix Sum + Index Deque (Advanced Sliding window).
-2. Is queen place is valid.
+2. Is queen place valid.
 
         **private boolean validate(char[][] board, int x, int y) {
               for(int i = 0; i < board.length; i++) {
@@ -158,7 +158,36 @@
            return current.val;
        }**
 
-14.
+14. Vertical Order of Binary Tree
+    
+        **TreeMap<Integer, TreeMap<Integer, PriorityQueue<Integer>>> nodes;
+        position, height, (elements....)
+        -1, 0, (1,2)**
            
+15. LCS Formula.
+
+        **public TreeNode rec(TreeNode root, TreeNode p, TreeNode q) {
+            if (root == null) return root;
+            if (root == p) return root;
+            if (root == q) return root;
+            TreeNode left = rec(root.left, p, q);
+            TreeNode right = rec(root.right, p, q);
+            if (left != null && right != null) return root;
+            return left != null ? left : right;
+        }**
+
+16. Binary Tree Upside down
+
+        **TreeNode parent = null;
+        public TreeNode rec(TreeNode root){
+            if(root == null) return null;
+            TreeNode right = rec(root.right);
+            TreeNode left  = rec(root.left);
     
-    
+            root.left = parent;
+            
+            parent = root;
+            return root;
+        }**
+
+17.
