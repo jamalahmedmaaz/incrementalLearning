@@ -46,10 +46,10 @@
 
         **public ListNode reverseList(ListNode head) {
             if (head == null || head.next == null) return head;
-            ListNode p = reverseList(head.next);
+            ListNode lastNode = reverseList(head.next);
             head.next.next = head;
             head.next = null;
-            return p;
+            return lastNode;
         }**
 
 6. Search in Binary Search Tree RECURSION.
@@ -64,6 +64,13 @@
             }
             return root;
         }**
+        
+        U Turn Operation on LinledList. (making train compartments
+        reversely linked)
+        
+        **head.next.next = head;
+        head.next = head;**
+        
 
 7. Pascals Triangle return a row of pascal triangle RECURSION
 
