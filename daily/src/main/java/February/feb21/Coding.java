@@ -1,7 +1,6 @@
 package February.feb21;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 public class Coding {
 
     /**
@@ -112,6 +111,33 @@ public class Coding {
                 }
             }
             return false;
+        }
+    }
+
+    class findSmallestRegion_Lowest_Common_Acestor {
+        public String findSmallestRegion(List<List<String>> regions, String region1, String region2) {
+            Map<String, String> parents = new HashMap();
+            for (List<String> region : regions) {
+                String parent = region.get(0);
+                for (int i = 1; i < region.size(); i++) {
+                    parents.put(region.get(i), parent);
+                }
+            }
+            Set<String> region1set = new HashSet();
+            while (region1 != null) {
+                region1set.add(region1);
+                region1 = parents.getOrDefault(region1, null);
+            }
+            String result = null;
+            while (region2 != null) {
+                if (region1set.contains(region2)) {
+                    result = region2;
+                    break;
+                }
+                region2 = parents.getOrDefault(region2, null);
+
+            }
+            return result;
         }
     }
 }
