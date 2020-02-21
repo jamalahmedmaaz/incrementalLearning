@@ -140,4 +140,142 @@ public class Coding {
             return result;
         }
     }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(Arrays.toString(solution.findStrobogrammatic(2).toArray()));
+    }
+
+    static class Solution {
+        private static final char[][] direction = {{'0', '0'}, {'1', '1'}, {'6', '9'}, {'8', '8'}, {'9', '6'}};
+        List<String> res = new ArrayList<>();
+
+        public List<String> findStrobogrammatic(int n) {
+            if (n < 1) {
+                return res;
+            }
+            rec(0, n - 1, new char[n]);
+            return res;
+        }
+
+        private void rec(int left, int right, char[] chars) {
+            if (left > right) {
+                String str = new String(chars);
+                res.add(str);
+                return;
+            }
+            if (left == right) {
+                chars[left] = '0';
+                rec(left + 1, right - 1, chars);
+                chars[left] = '1';
+                rec(left + 1, right - 1, chars);
+                chars[left] = '8';
+                rec(left + 1, right - 1, chars);
+                return;
+            }
+            for (int i = 0; i < 5; i++) {
+                if (i == 0 && left == 0) {
+                    continue;
+                }
+                chars[left] = direction[i][0];
+                chars[right] = direction[i][1];
+                rec(left + 1, right - 1, chars);
+            }
+        }
+    }
+
+    class ReverseKGroup {
+        public ListNode reverseKGroup(ListNode head, int k) {
+            ListNode curr = head;
+            int count = 0;
+            while (curr != null && count != k) { // find the k+1 node
+                curr = curr.next;
+                count++;
+            }
+            if (count == k) { // if k+1 node is found
+                curr = reverseKGroup(curr, k); // reverse list with k+1 node as head
+                // head - head-pointer to direct part,
+                // curr - head-pointer to reversed part;
+                while (count-- > 0) { // reverse current k-group:
+                    ListNode tmp = head.next; // tmp - next head in direct part
+                    head.next = curr; // preappending "direct" head to the reversed list
+                    curr = head; // move head of reversed part to a new node
+                    head = tmp; // move "direct" head to the next node in direct part
+                }
+                head = curr;
+            }
+            return head;
+        }
+
+        class ListNode {
+            public ListNode next;
+        }
+    }
+
+    class AccountsMerge_UnionFind {
+
+        List<List<String>> accounts;
+        int[] uf;
+
+        public List<List<String>> accountsMerge(List<List<String>> accounts) {
+            this.accounts = accounts;
+            uf = new int[accounts.size()];
+            for (int i = 0; i < uf.length; i++) {
+                uf[i] = i;
+            }
+            List<List<String>> result = new ArrayList();
+            for (int i = 0; i < accounts.size(); i++) {
+                for (int j = i + 1; j < accounts.size(); j++) {
+                    if (areEmailAddressCommon(accounts, i, j)) {
+                        union(i, j);
+                    }
+                }
+            }
+            Map<Integer, Set<Integer>> map = new HashMap();
+            for (int i = 0; i < uf.length; i++) {
+                int parent = uf[i];
+                int child = i;
+                if (!map.containsKey(parent)) {
+                    map.put(parent, new HashSet());
+                }
+                map.get(parent).add(child);
+            }
+
+            for (Map.Entry<Integer, Set<Integer>> entry : map.entrySet()) {
+                Set<String> val = new TreeSet();
+                for (int i : entry.getValue()) {
+                    val.addAll(accounts.get(i));
+                }
+                result.add(new ArrayList(val));
+            }
+
+//            System.out.println(map);
+            return result;
+        }
+
+        private boolean areEmailAddressCommon(List<List<String>> accounts, int i, int j) {
+            List<String> x1 = accounts.get(i).subList(1, accounts.get(i).size());
+            List<String> x2 = accounts.get(j).subList(1, accounts.get(j).size());
+            return !Collections.disjoint(x1, x2);
+        }
+
+        public boolean union(int i, int j) {
+            int pi = find(i);
+            int pj = find(j);
+            if (pi != pj) {
+                uf[pj] = pi;
+                return true;
+            }
+            return false;
+        }
+
+        public int find(int idx) {
+            if (uf[idx] != idx) {
+                uf[idx] = find(uf[idx]);
+            }
+            return uf[idx];
+        }
+
+    }
+
 }
