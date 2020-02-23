@@ -2,6 +2,7 @@ package February.feb22;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 public class Coding {
     class IsGraphBipartite {
         int[] color;
@@ -62,6 +63,63 @@ public class Coding {
                 }
             }
             return true;
+        }
+    }
+
+    public class LongestValidParentheses_Stack {
+
+        /**
+         * How does it work?
+         * <p>
+         * Idea is simple: Use stack to maintain two things,
+         * <p>
+         * 1. Open parenthesis index. whenever you see it.
+         * 2. Keep a boundary index.
+         * 3. Pop when you see a closing parenthesis and if stack not empty check
+         * for the max length = loopIndex - stack.peek(), if stack is empty, then
+         * add the loopIndex into stack.
+         * <p>
+         * <p>
+         * What did we learn?
+         * <p>
+         * 1. We know for problems were you dont know what to do with an element
+         * current '(' because it depends on future element ')' ,we use stack.
+         * 2. But we have used stack in a very different way here, we used stack
+         * to maintain indexes.
+         * 3. PLUS - CORE IDEA, using a boundary index in stack. (like we added
+         * -1 and every time we see a closing index we use a previous boundary
+         * index to calculate max (boundary index can be anything based on input
+         * starting from -1, 0, 1, 2, 3.....N.
+         *
+         * @param s
+         * @return
+         */
+
+        public int longestValidParentheses(String s) {
+            if (s == null || s.length() == 0 || s.length() == 1) {
+                return 0;
+            }
+            int result = 0;
+            Stack<Integer> stack = new Stack();
+            stack.push(-1);
+            for (int i = 0; i < s.length(); i++) {
+                char c = s.charAt(i);
+                switch (c) {
+                    case '(':
+                        stack.push(i);
+                        break;
+                    case ')':
+                        stack.pop();
+                        if (stack.isEmpty()) {
+                            stack.push(i);
+                        } else {
+                            result = Math.max(result, i - stack.peek());
+                        }
+                        break;
+                }
+            }
+
+            return result;
         }
     }
 

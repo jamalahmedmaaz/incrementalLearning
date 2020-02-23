@@ -199,3 +199,9 @@
         }**
 
 17. Similarity between Number of islands VS Graph bipartite.
+
+18. While find max sum of a path in Binary Tree, remember not to return negative
+    values, because it will reduce the overall sum of the out bigger tree (for
+    which the current tree is a subtree (LC: 124))
+
+19. 
