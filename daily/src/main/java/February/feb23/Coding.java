@@ -1,6 +1,8 @@
 package February.feb23;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 public class Coding {
 
     public class NextGreaterElement_III {
@@ -49,6 +51,47 @@ public class Coding {
                 }
             }
             return i;
+        }
+    }
+
+    class MincostToHireWorkers {
+        public double mincostToHireWorkers(int[] quality, int[] wage, int K) {
+            Worker[] workers = new Worker[wage.length];
+            for (int i = 0; i < wage.length; i++) {
+                workers[i] = new Worker(quality[i], wage[i]);
+            }
+            Arrays.sort(workers, Comparator.comparingDouble(Worker::ratio));
+
+            double result = Double.MAX_VALUE;
+            int sum_of_quality = 0;
+            PriorityQueue<Worker> pq = new PriorityQueue<>((a, b) -> b.quality - a.quality);
+            for (Worker w : workers) {
+                pq.add(w);
+                sum_of_quality += w.quality;
+                if (pq.size() > K) {
+                    sum_of_quality -= pq.poll().quality;
+                }
+                if (pq.size() == K) {
+                    result = Math.min(result, sum_of_quality * w.ratio);
+                }
+            }
+            return result;
+        }
+
+        class Worker {
+            int quality;
+            int wage;
+            double ratio;
+
+            public Worker(int q, int w) {
+                quality = q;
+                wage = w;
+                ratio = (double) wage / (double) quality;
+            }
+
+            public double ratio() {
+                return ratio;
+            }
         }
     }
 }
