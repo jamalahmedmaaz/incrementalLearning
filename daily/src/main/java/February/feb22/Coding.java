@@ -1,9 +1,6 @@
 package February.feb22;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 public class Coding {
     enum Color {
         NEUTRAL,
@@ -165,4 +162,60 @@ public class Coding {
         }
     }
 
+    class Solution {
+        Set<String> validexpression = new HashSet<>();
+        StringBuilder tmp;
+
+        public List<String> removeInvalidParentheses(String s) {
+            int left = 0;
+            int right = 0;
+            for (char c : s.toCharArray()) {
+                if (c == '(') {
+                    left++;
+                } else if (c == ')') {
+                    if (left > 0) {
+                        left--;
+                    } else {
+                        right++;
+                    }
+                }
+            }
+
+            // now I have min number of left right bracket to remove
+            // now backtrack
+            dfs(s, 0, 0, left, right);
+            return new ArrayList<>(validexpression);
+
+        }
+
+        private void dfs(String s, int index, int open,
+                         int left, int right) {
+            if (left < 0 || right < 0 || open < 0) {
+                return;
+            }
+            if (index == s.length()) {
+                if (left == right && left == 0 && open == 0) {
+                    validexpression.add(tmp.toString());
+                }
+                return;
+            }
+            char c = s.charAt(index);
+            int len = tmp.length();
+            if (c == '(') {
+                dfs(s, index + 1, open, left - 1, right); // not use
+                tmp.append(c);
+                dfs(s, index + 1, open + 1, left, right); // use
+
+            } else if (c == ')') {
+
+                dfs(s, index + 1, open, left, right - 1); // not use
+                tmp.append(c);
+                dfs(s, index + 1, open - 1, left, right); // use
+            } else {
+                tmp.append(c);
+                dfs(s, index + 1, open, left, right);
+            }
+            tmp.setLength(len);
+        }
+    }
 }
