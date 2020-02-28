@@ -1,8 +1,6 @@
 package February.feb23;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.*;
 public class Coding {
 
     public class NextGreaterElement_III {
@@ -94,4 +92,50 @@ public class Coding {
             }
         }
     }
+
+    class Solution {
+        int[][] directions = new int[][]{{2, 1}, {1, 2}, {2, -1}, {1, -2},
+                {-2, 1}, {-1, 2}, {-2, -1}, {-1, -2}};
+
+        public double knightProbability(int N, int K, int r, int c) {
+            Queue<Element> q = new LinkedList();
+            q.add(new Element(r, c, 0));
+            int whatShouldHaveHappend = 0;
+            int whatHaveCompletelyHappened = 0;
+            while (!q.isEmpty()) {
+                Element current = q.poll();
+                if (current.count == K) {
+                    whatShouldHaveHappend++;
+                    whatHaveCompletelyHappened++;
+                    continue;
+                }
+                boolean added = false;
+                for (int[] dir : directions) {
+                    int nx = current.x + dir[0];
+                    int ny = current.y + dir[1];
+                    if (nx >= 0 && ny >= 0 && nx < N && ny < N) {
+                        q.add(new Element(nx, ny, current.count + 1));
+                        added = true;
+                    }
+                }
+                if (!added) {
+                    whatHaveCompletelyHappened++;
+                }
+            }
+            return whatShouldHaveHappend / whatHaveCompletelyHappened;
+        }
+
+        class Element {
+            int x;
+            int y;
+            int count;
+
+            public Element(int x, int y, int count) {
+                this.x = x;
+                this.y = y;
+                this.count = count;
+            }
+        }
+    }
+
 }

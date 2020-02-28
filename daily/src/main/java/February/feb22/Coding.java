@@ -1,9 +1,16 @@
 package February.feb22;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 public class Coding {
+    enum Color {
+        NEUTRAL,
+        RED,
+        BLUE
+    }
+
     class IsGraphBipartite {
         int[] color;
 
@@ -64,8 +71,43 @@ public class Coding {
             }
             return true;
         }
-    }
 
+        class IsBipartite_READABLE {
+            Color[] color;
+            int[][] graph;
+
+            public boolean isBipartite(int[][] graph) {
+                this.graph = graph;
+                this.color = new Color[graph.length];
+                Arrays.fill(color, Color.NEUTRAL);
+                for (int i = 0; i < graph.length; i++) {
+                    if (color[i] == Color.NEUTRAL) {
+                        color[i] = Color.RED;
+                        if (!dfs(i)) {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+
+            public boolean dfs(int parent) {
+                for (int neigh : graph[parent]) {
+                    if (color[neigh] == Color.NEUTRAL) {
+                        color[neigh] = color[parent] ==
+                                Color.RED ? Color.BLUE : Color.RED;
+                        if (!dfs(neigh)) {
+                            return false;
+                        }
+                    } else if (color[neigh] == color[parent]) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+        }
+    }
     public class LongestValidParentheses_Stack {
 
         /**
