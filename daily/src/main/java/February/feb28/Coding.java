@@ -1,9 +1,6 @@
 package February.feb28;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 public class Coding {
     class LowestCommonAccesstorOfDeepestLeaves {
         TreeNode result;
@@ -96,4 +93,65 @@ public class Coding {
             return size;
         }
     }
+
+    public static void main(String[] args) {
+        System.out.println("jamal".substring(2));
+    }
+
+    class TaskScheduler {
+        public int leastInterval(char[] tasks, int n) {
+            int[] map = new int[26];
+            for (char c : tasks) {
+                map[c - 'A']++;
+            }
+            Arrays.sort(map);
+            int time = 0;
+            while (map[25] > 0) {
+                int i = 0;
+                while (i <= n) {
+                    if (map[25] == 0) {
+                        break;
+                    }
+                    if (i < 26 && map[25 - i] > 0) {
+                        map[25 - i]--;
+                    }
+                    time++;
+                    i++;
+                }
+                Arrays.sort(map);
+            }
+            return time;
+        }
+    }
+
+    public class Solution {
+        public boolean isMatch(String s, String p) {
+            if (p.length() == 0) {
+                return s.length() == 0;
+            }
+            if (starCondition(p)) {  // second char is '*'
+                if (isMatch(s, p.substring(2))) {
+                    return true;
+                }
+                if (dotConditionOrDefault(s, p)) {
+                    return isMatch(s.substring(1), p);
+                }
+                return false;
+            } else {                                     // second char is not '*'
+                if (dotConditionOrDefault(s, p)) {
+                    return isMatch(s.substring(1), p.substring(1));
+                }
+                return false;
+            }
+        }
+
+        private boolean starCondition(String p) {
+            return p.length() > 1 && p.charAt(1) == '*';
+        }
+
+        private boolean dotConditionOrDefault(String s, String p) {
+            return s.length() > 0 && (p.charAt(0) == '.' || s.charAt(0) == p.charAt(0));
+        }
+    }
 }
+
