@@ -1,5 +1,7 @@
 package March.march02;
 
+import java.util.ArrayList;
+import java.util.List;
 public class Coding {
     public class NumberOfDecodingWays_II {
         int M = 1000000007;
@@ -75,4 +77,58 @@ public class Coding {
             return (int) second;
         }
     }
+
+    class Solution {
+        List<Pair> dp = new ArrayList();
+
+        public int findNumberOfLIS(int[] nums) {
+            if (nums.length == 0) {
+                return 0;
+            }
+            for (int i = 0; i < nums.length; i++) {
+                dp.add(new Pair(-1, 1));
+            }
+            int LIS = 0, ans = 0;
+            rec(nums.length - 1, nums);
+            for (Pair pair : dp) {
+                LIS = Math.max(LIS, pair.first);
+            }
+            for (Pair p : dp) {
+                if (p.first == LIS) {
+                    ans += p.second;
+                }
+            }
+            return ans;
+        }
+
+        public int rec(int i, int[] nums) {
+            if (dp.get(i).first != -1) {
+                return dp.get(i).first;
+            }
+            int ans = 1;
+            for (int j = 0; j < i; j++) {
+                int val = rec(j, nums);
+                if (nums[i] > nums[j] && ans <= val + 1) {
+                    if (ans == val + 1) {
+                        dp.get(i).second += dp.get(j).second;
+                    } else {
+                        ans = val + 1;
+                        dp.get(i).second = dp.get(j).second;
+                    }
+                }
+            }
+            return dp.get(i).first = ans;
+        }
+
+        class Pair {
+            int first;
+            int second;
+
+            public Pair(int first, int second) {
+                this.first = first;
+                this.second = second;
+            }
+        }
+    }
+
 }

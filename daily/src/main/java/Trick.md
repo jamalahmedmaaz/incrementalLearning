@@ -204,4 +204,10 @@
     values, because it will reduce the overall sum of the out bigger tree (for
     which the current tree is a subtree (LC: 124))
 
-19. 
+19. Count Longest Increasing Subsequence:
+    Trick is to maintain a dp list of pairs = fill with (-1,1)
+    key = length, value = count
+    
+    Recursion will return the max length but maintain dp index pair with count.
+    
+    after doing recursion, iterate and add the count of longest sub-sequence.
