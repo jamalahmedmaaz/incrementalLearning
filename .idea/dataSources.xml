@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="dev-jamal-mysql" uuid="9fab579a-0fba-4b0c-9f7c-0c0dd2c86dcc">
+    <data-source source="LOCAL" name="atif-db" uuid="9fab579a-0fba-4b0c-9f7c-0c0dd2c86dcc">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://dev-jamal-mysql.cat2z32ly9k6.eu-west-1.rds.amazonaws.com:3306</jdbc-url>
+      <jdbc-url>jdbc:mysql://atif-database-1.cff5vje10bbt.ap-south-1.rds.amazonaws.com:3306</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />
