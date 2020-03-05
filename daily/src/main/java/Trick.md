@@ -211,3 +211,11 @@
     Recursion will return the max length but maintain dp index pair with count.
     
     after doing recursion, iterate and add the count of longest sub-qsequence.
+    
+20. BINARY - SEARCH
+    done always think in terms of checking low mid and high.
+    sometime you need to think about comparing mid with first index '0' or
+    last index 'n-1'
+    Example: 153. Find Minimum in Rotated Sorted Array
+    
+21. 
