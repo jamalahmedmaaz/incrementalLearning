@@ -1,9 +1,11 @@
 package March.march02;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 public class Coding {
-    public class NumberOfDecodingWays_II {
+    class NumberOfDecodingWays_II {
         int M = 1000000007;
         Integer[] dp;
         String s;
@@ -78,7 +80,7 @@ public class Coding {
         }
     }
 
-    class Solution {
+    class CountNumberOfLongestIncreasingSubsequences {
         List<Pair> dp = new ArrayList();
 
         public int findNumberOfLIS(int[] nums) {
@@ -89,7 +91,9 @@ public class Coding {
                 dp.add(new Pair(-1, 1));
             }
             int LIS = 0, ans = 0;
+
             rec(nums.length - 1, nums);
+
             for (Pair pair : dp) {
                 LIS = Math.max(LIS, pair.first);
             }
@@ -208,4 +212,128 @@ public class Coding {
         }
     }
 
+    class LongestSubstringwithAtLeastKRepeatingCharacters {
+        public int longestSubstring(String s, int k) {
+            if (s == null || s.length() == 0 || k == 0) {
+                return 0;
+            }
+            int[] count = new int[128];
+            int result = 0;
+            for (int i = 0; i < s.length(); i++) {
+                count[s.charAt(i)]++;
+            }
+            List<Integer> positions = new ArrayList<>();
+            for (int i = 0; i < s.length(); i++) {
+                if (count[s.charAt(i)] < k) {
+                    positions.add(i);
+                }
+            }
+            if (positions.size() == 0) {
+                return s.length();
+            }
+            positions.add(0, -1);
+            positions.add(s.length());
+            for (int idx = 1; idx < positions.size(); idx++) {
+                int start = positions.get(idx - 1) + 1;
+                int end = positions.get(idx);
+                int next = longestSubstring(s.substring(start, end), k);
+                result = Math.max(result, next);
+            }
+            return result;
+        }
+    }
+
+    class MaximalRectangle {
+
+        public int maximalRectangle(char[][] matrix) {
+            if (matrix.length == 0) {
+                return 0;
+            }
+            int m = matrix.length;
+            int n = matrix[0].length;
+            // initialize left as the
+            //leftmost boundary possible
+            int[] left = new int[n];
+            int[] right = new int[n];
+            int[] height = new int[n];
+            // initialize right as the
+            // rightmost boundary possible
+            Arrays.fill(right, n);
+
+            int maxarea = 0;
+            for (int i = 0; i < m; i++) {
+                int cur_left = 0, cur_right = n;
+                // update height
+                for (int j = 0; j < n; j++) {
+                    if (matrix[i][j] == '1') {
+                        height[j]++;
+                    } else {
+                        height[j] = 0;
+                    }
+                }
+                // update left
+                for (int j = 0; j < n; j++) {
+                    if (matrix[i][j] == '1') {
+                        left[j] = Math.max(left[j], cur_left);
+                    } else {
+                        left[j] = 0;
+                        cur_left = j + 1;
+                    }
+                }
+                // update right
+                for (int j = n - 1; j >= 0; j--) {
+                    if (matrix[i][j] == '1') {
+                        right[j] = Math.min(right[j], cur_right);
+                    } else {
+                        right[j] = n;
+                        cur_right = j;
+                    }
+                }
+                // update area
+                for (int j = 0; j < n; j++) {
+                    maxarea = Math.max(maxarea, (right[j] - left[j]) * height[j]);
+                }
+                return maxarea;
+            }
+            return -1;
+        }
+
+        public int maximalRectangle_stack(char[][] matrix) {
+            if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+                return 0;
+            }
+            int col = matrix[0].length;
+            int row = matrix.length;
+            int[] height = new int[col + 1];
+            height[col] = 0;
+            int max = 0;
+
+            for (int rowIndex = 0; rowIndex < row; rowIndex++) {
+                Stack<Integer> s = new Stack<>();
+                for (int colIndex = 0; colIndex < height.length; colIndex++) {
+                    if (colIndex < col) {
+                        if (matrix[rowIndex][colIndex] == '1') {
+                            height[colIndex] += 1;
+                        } else {
+                            height[colIndex] = 0;
+                        }
+                    }
+
+                    if (s.isEmpty() || height[s.peek()] <= height[colIndex]) {
+                        s.push(colIndex);
+                    } else {
+                        while (!s.isEmpty() && height[colIndex] < height[s.peek()]) {
+                            int top = s.pop();
+                            int area = height[top] * (s.isEmpty() ? colIndex : (colIndex - s.peek() - 1));
+                            if (area > max) {
+                                max = area;
+                            }
+                        }
+                        s.push(colIndex);
+                    }
+                }
+            }
+            return max;
+        }
+    }
 }
