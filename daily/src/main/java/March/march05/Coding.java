@@ -159,4 +159,42 @@ public class Coding {
             }
         }
     }
+
+    /**
+     * Given a list of non negative integers, arrange them such that they form
+     * the largest number.
+     * <p>
+     * Example 1:
+     * <p>
+     * Input: [10,2]
+     * Output: "210"
+     * Example 2:
+     * <p>
+     * Input: [3,30,34,5,9]
+     * Output: "9534330"
+     * Note: The result may be very large, so you need to return a string
+     * instead of an integer.
+     */
+    class LargestNumberFromIntegerArrayToString {
+        public String largestNumber(int[] nums) {
+            String[] strs = new String[nums.length];
+            for (int i = 0; i < nums.length; i++) {
+                strs[i] = String.valueOf(nums[i]);
+            }
+            Arrays.sort(strs, (s1, s2) -> {
+                String cal1 = s1 + s2;
+                String cal2 = s2 + s1;
+                return cal2.compareTo(cal1);
+            });
+            if (strs[0].equals("0")) {
+                return "0";
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (String s : strs) {
+                sb.append(s);
+            }
+            return sb.toString();
+        }
+    }
 }
