@@ -1,8 +1,9 @@
 package February.feb4;
 
-import javafx.util.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+
 public class Coding {
     /**
      * 763. Partition Labels
@@ -43,7 +44,7 @@ public class Coding {
                     continue;
                 }
                 if (list.isEmpty()) {
-                    list.add(new Pair(startIndex, endIndex));
+                    list.add(Pair.of(startIndex, endIndex));
                 } else {
                     if (i > 0) {
                         char pc = S.charAt(i - 1);
@@ -51,10 +52,10 @@ public class Coding {
                         int pstart = pair.getKey();
                         int pend = pair.getValue();
                         if (pend < i) {
-                            Pair<Integer, Integer> newp = new Pair(startIndex, endIndex);
+                            Pair<Integer, Integer> newp = Pair.of(startIndex, endIndex);
                             list.add(newp);
                         } else if (startIndex < pstart || pend < endIndex) {
-                            Pair<Integer, Integer> newp = new Pair(Math.min(pstart, startIndex), endIndex);
+                            Pair<Integer, Integer> newp = Pair.of(Math.min(pstart, startIndex), endIndex);
                             list.remove(list.size() - 1);
                             list.add(newp);
                         }

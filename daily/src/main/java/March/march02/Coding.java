@@ -88,7 +88,7 @@ public class Coding {
                 return 0;
             }
             for (int i = 0; i < nums.length; i++) {
-                dp.add(new Pair(-1, 1));
+                dp.add(Pair.of(-1, 1));
             }
             int LIS = 0, ans = 0;
 

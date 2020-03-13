@@ -1,10 +1,11 @@
 package February.feb14;
 
-import javafx.util.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 public class Coding {
 
     class SubtreeWithAllDeepest {
@@ -14,7 +15,7 @@ public class Coding {
 
         public Pair<Integer, DeepTreeNode> deep(DeepTreeNode root) {
             if (root == null) {
-                return new Pair(0, null);
+                return Pair.of(0, null);
             }
             Pair<Integer, DeepTreeNode> left = deep(root.left);
             Pair<Integer, DeepTreeNode> right = deep(root.right);
@@ -32,7 +33,7 @@ public class Coding {
             } else {
                 deepTreeNode = right.getValue();
             }
-            return new Pair(currentDepth, deepTreeNode);
+            return Pair.of(currentDepth, deepTreeNode);
         }
 
         class DeepTreeNode {

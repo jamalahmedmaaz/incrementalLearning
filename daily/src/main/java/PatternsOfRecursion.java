@@ -1,6 +1,8 @@
-import javafx.util.Pair;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+
 public class PatternsOfRecursion {
 
     class NoReturn_Recursion {
@@ -81,7 +83,7 @@ public class PatternsOfRecursion {
 
         public Pair<Integer, TreeNode> rec(TreeNode root) {
             if (root == null) {
-                return new Pair(0, null);
+                return Pair.of(0, null);
             }
 
             Pair<Integer, TreeNode> left = rec(root.left);
@@ -98,7 +100,7 @@ public class PatternsOfRecursion {
                 node = right.getValue();
             }
 
-            return new Pair(currentDepth, node);
+            return Pair.of(currentDepth, node);
         }
 
     }
