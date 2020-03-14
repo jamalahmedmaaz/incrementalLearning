@@ -13,18 +13,19 @@ public class Coding {
             return rec(s, p, 0, 0);
         }
 
-        public boolean rec(String s, String p, int si, int pi) {
+        public boolean rec(String k, String l, int si, int pi) {
+            System.out.println(si +" "+pi);
             if (pi == p.length()) {
                 System.out.println(si + " " + pi + " -- " + s + " -- " + p);
                 return si == s.length();
             }
             if (dp[si][pi] != null) return dp[si][pi];
             boolean result = false;
-            if (dotOrDefault(si, pi) && rec(s.substring(1), p.substring(1), si + 1, pi + 1)) {
+            if (dotOrDefault(si, pi) && rec(s, p, si + 1, pi + 1)) {
                 result = true;
-            } else if (starCondition(pi) && rec(s, p.substring(2), si, pi + 2)) {
+            } else if (starCondition(pi) && rec(s, p, si, pi + 2)) {
                 result = true;
-            } else if (dotOrDefault(si, pi) && starCondition(pi) && rec(s.substring(1), p, si + 1, pi)) {
+            } else if (dotOrDefault(si, pi) && starCondition(pi) && rec(s, p, si + 1, pi)) {
                 result = true;
             }
             return dp[si][pi] = result;
@@ -41,6 +42,7 @@ public class Coding {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
+//        System.out.println(solution.isMatch("aa", "a"));
         System.out.println(solution.isMatch("aa", "a*"));
     }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
+
 public class Coding {
     class NumberOfDecodingWays_II {
         int M = 1000000007;
@@ -88,7 +89,7 @@ public class Coding {
                 return 0;
             }
             for (int i = 0; i < nums.length; i++) {
-                dp.add(Pair.of(-1, 1));
+                dp.add(new Pair(-1, 1));
             }
             int LIS = 0, ans = 0;
 
