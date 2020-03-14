@@ -3,6 +3,7 @@ package March.march15;
 public class Coding {
 
     class Game_Name_24_Problem_Number_679_NotWorking {
+
         int[] A;
         boolean[] used;
 
