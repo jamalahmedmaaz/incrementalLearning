@@ -271,4 +271,17 @@ public class Coding {
             }
         }
     }
+
+    class DistanceFunctions {
+
+        public int manhattan_distance(int x0, int x1, int y0, int y1) {
+            return Math.abs(x0 - x1) + Math.abs(y0 - y1);
+        }
+
+        public double euclidean_distance(int x0, int x1, int y0, int y1) {
+            int x = (x0 - x1) * (x0 - x1);
+            int y = (y0 - y1) * (y0 - y1);
+            return Math.sqrt(x + y);
+        }
+    }
 }
